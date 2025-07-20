@@ -1,4 +1,4 @@
-import random
+import secrets
 
 def encrypt(key, data):
     # KSA
@@ -43,7 +43,7 @@ class register:
         # The mac address is inverted
         self.mac = mac[::-1]
         self.productid = productid
-        self.token = bytearray(random.getrandbits(8) for _ in range(12))
+        self.token = bytearray(secrets.SystemRandom().getrandbits(8) for _ in range(12))
 
     def mix_a(self):
         return bytes([self.mac[0], self.mac[2], self.mac[5], (self.productid & 0xff), (self.productid & 0xff), self.mac[4], self.mac[5], self.mac[1]])
